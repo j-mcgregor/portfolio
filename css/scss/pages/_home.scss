@@ -2,9 +2,13 @@
 // Homepage
 //**
 
+body {
+  margin: 0;
+}
 
-
-
+canvas {
+  border: 1px solid black;
+}
 
 // Responsive styles if needed
 // @include responsive($big-break) {

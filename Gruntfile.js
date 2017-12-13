@@ -1,9 +1,9 @@
 module.exports = function(grunt) {
- 
+
   //Checks the dependencies associated with Grunt and autoloads
   //& requires ALL of them in this Gruntfile
   require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
- 
+
   // Project configuration.
   grunt.initConfig({
 
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
     connect: {
       server: {
         options: {
-          port: 9001,
+          port: 3000,
           base: ''
         }
       }
@@ -78,10 +78,10 @@ module.exports = function(grunt) {
     // Open
     open : {
       dev : {
-        path: 'http://localhost:9001'
+        path: 'http://localhost:3000'
       }
     },
- 
+
 
 
 
@@ -100,9 +100,9 @@ module.exports = function(grunt) {
         'postcss'
       ]
     }
- 
+
   });
- 
+
   //grunt serve
   grunt.registerTask('default', ['connect', 'open', 'watch']);
 };
