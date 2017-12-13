@@ -6,10 +6,21 @@ canvas.height = window.innerHeight;
 // create the context in the form of the 'c', basically passing 'c' a ton of canvas methods and functions which we can use to draw with
 var c = canvas.getContext('2d');
 
+
+var mouse = {
+  x: undefined,
+  y: undefined
+}
+
+var maxRadius = 60;
+var minRadius = 15;
+
 // eventlistener need an event argumant
 window.addEventListener('mousemove', function(event) {
   
-  console.log(event);
+  mouse.x = event.x;
+  mouse.y = event.y;
+  console.log(mouse.x, mouse.y);
   
 
 })
@@ -20,14 +31,16 @@ function Circle(x, y, dx, dy, radius, color) {
   this.dx = dx;
   this.dy = dy;
   this.radius = radius;
+  this.minRadius = radius;
   this.color = color;
 
-  this.randomNumber = function (num) {
-    return Math.floor(Math.random() * num);
-  }
-  this.randomColor = function () {
-    return "rgba(" + this.randomNumber(255) + "," + this.randomNumber(255) + "," + this.randomNumber(255) + ",.5)";
-  }
+  // I've kept the two below functions just in case there are static objects that need solid colours
+  // this.randomNumber = function (num) {
+  //   return Math.floor(Math.random() * num);
+  // }
+  // this.randomColor = function () {
+  //   return "rgba(" + this.randomNumber(255) + "," + this.randomNumber(255) + "," + this.randomNumber(255) + ",)";
+  // }
 
   this.draw = function () {
     c.beginPath();
@@ -42,6 +55,7 @@ function Circle(x, y, dx, dy, radius, color) {
   }
 
   this.update = function () {
+    // Wall-bounding
     if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
       this.dx = -this.dx
     }
@@ -50,8 +64,18 @@ function Circle(x, y, dx, dy, radius, color) {
       this.dy = -this.dy
     }
 
+    // Velocity
     this.x += this.dx;
     this.y += this.dy;
+
+    // Interactivity
+    if (mouse.x - this.x < 70 && mouse.x - this.x > -70 && mouse.y - this.y < 70 && mouse.y - this.y > -70) {
+      if (this.radius < maxRadius ) {
+        this.radius += 1;
+      }
+    } else if (this.radius > this.minRadius) {
+      this.radius -= 1;
+    }
 
     this.draw();
   }
@@ -61,20 +85,21 @@ function Circle(x, y, dx, dy, radius, color) {
 
 var circleArray = [];
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 200; i++) {
   
   randomNumber = function (num) {
     return Math.floor(Math.random() * num);
   }
 
-  var radius = Math.random() * 20;
+  var radius = Math.random() * 20 + 1;
   var x = Math.random() * (innerWidth - (radius * 2)) + radius;
   var y = Math.random() * (innerHeight - (radius * 2)) + radius;
   var dx = (Math.random() - 0.5) * randomNumber(10);
   var dy = (Math.random() - 0.5) * randomNumber(10);
 
+  // Lower the first color for blue/geen color theme, the second for red/purple/indigo, the third for red/yellow/orange
   randomColor = function () {
-    return "rgba(" + randomNumber(255) + "," + randomNumber(255) + "," + randomNumber(255) + ",.5)";
+    return "rgba(" + randomNumber(255) + "," + randomNumber(255) + "," + randomNumber(255) + "," + Math.random() + ")";
   }
 
   circleArray.push(new Circle(x, y, dx, dy, radius, randomColor()));
