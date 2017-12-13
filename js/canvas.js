@@ -6,11 +6,13 @@ canvas.height = window.innerHeight;
 // create the context in the form of the 'c', basically passing 'c' a ton of canvas methods and functions which we can use to draw with
 var c = canvas.getContext('2d');
 
-// var x = Math.random() * innerWidth;
-// var y = Math.random() * innerHeight;
-// var dx = (Math.random() - 0.5) * 10;
-// var dy = (Math.random() - 0.5) * 10;
-// var radius = 30
+// eventlistener need an event argumant
+window.addEventListener('mousemove', function(event) {
+  
+  console.log(event);
+  
+
+})
 
 function Circle(x, y, dx, dy, radius, color) {
   this.x = x;
@@ -60,16 +62,17 @@ function Circle(x, y, dx, dy, radius, color) {
 var circleArray = [];
 
 for (let i = 0; i < 100; i++) {
+  
+  randomNumber = function (num) {
+    return Math.floor(Math.random() * num);
+  }
 
   var radius = Math.random() * 20;
   var x = Math.random() * (innerWidth - (radius * 2)) + radius;
   var y = Math.random() * (innerHeight - (radius * 2)) + radius;
-  var dx = (Math.random() - 0.5) * 10;
-  var dy = (Math.random() - 0.5) * 10;
+  var dx = (Math.random() - 0.5) * randomNumber(10);
+  var dy = (Math.random() - 0.5) * randomNumber(10);
 
-  randomNumber = function (num) {
-    return Math.floor(Math.random() * num);
-  }
   randomColor = function () {
     return "rgba(" + randomNumber(255) + "," + randomNumber(255) + "," + randomNumber(255) + ",.5)";
   }
@@ -87,11 +90,6 @@ function animate() {
     circleArray[i].update();
 
   }
-
-  circle.update();
-
-
-
 }
 
 animate();
