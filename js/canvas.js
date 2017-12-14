@@ -12,17 +12,25 @@ var mouse = {
   y: undefined
 }
 
-var maxRadius = 60;
-var minRadius = 15;
+var maxRadius = 30;
+var minRadius = 5;
 
 // eventlistener need an event argumant
-window.addEventListener('mousemove', function(event) {
-  
+window.addEventListener('mousemove', function (event) {
+
   mouse.x = event.x;
   mouse.y = event.y;
   console.log(mouse.x, mouse.y);
-  
 
+})
+
+// eventlistener need an event argumant
+window.addEventListener('resize', function (event) {
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  init();
 })
 
 function Circle(x, y, dx, dy, radius, color) {
@@ -70,7 +78,7 @@ function Circle(x, y, dx, dy, radius, color) {
 
     // Interactivity
     if (mouse.x - this.x < 70 && mouse.x - this.x > -70 && mouse.y - this.y < 70 && mouse.y - this.y > -70) {
-      if (this.radius < maxRadius ) {
+      if (this.radius < maxRadius) {
         this.radius += 1;
       }
     } else if (this.radius > this.minRadius) {
@@ -85,27 +93,32 @@ function Circle(x, y, dx, dy, radius, color) {
 
 var circleArray = [];
 
-for (let i = 0; i < 200; i++) {
-  
-  randomNumber = function (num) {
-    return Math.floor(Math.random() * num);
+
+function init() {
+
+  circleArray = [];
+  for (let i = 0; i < 800; i++) {
+
+    randomNumber = function (num) {
+      return Math.floor(Math.random() * num);
+    }
+
+    var radius = Math.random() * 5 + 1;
+    var x = Math.random() * (innerWidth - (radius * 2)) + radius;
+    var y = Math.random() * (innerHeight - (radius * 2)) + radius;
+    var dx = (Math.random() - 0.5) * randomNumber(10);
+    var dy = (Math.random() - 0.5) * randomNumber(10);
+
+    // Lower the first color for blue/geen color theme, the second for red/purple/indigo, the third for red/yellow/orange
+    randomColor = function () {
+      return "rgba(" + randomNumber(255) + "," + randomNumber(255) + "," + randomNumber(255) + "," + Math.random() + ")";
+    }
+
+    circleArray.push(new Circle(x, y, dx, dy, radius, randomColor()));
+
   }
-
-  var radius = Math.random() * 20 + 1;
-  var x = Math.random() * (innerWidth - (radius * 2)) + radius;
-  var y = Math.random() * (innerHeight - (radius * 2)) + radius;
-  var dx = (Math.random() - 0.5) * randomNumber(10);
-  var dy = (Math.random() - 0.5) * randomNumber(10);
-
-  // Lower the first color for blue/geen color theme, the second for red/purple/indigo, the third for red/yellow/orange
-  randomColor = function () {
-    return "rgba(" + randomNumber(255) + "," + randomNumber(255) + "," + randomNumber(255) + "," + Math.random() + ")";
-  }
-
-  circleArray.push(new Circle(x, y, dx, dy, radius, randomColor()));
 
 }
-
 
 function animate() {
   requestAnimationFrame(animate);
@@ -118,7 +131,7 @@ function animate() {
 }
 
 animate();
-
+init();
 
 
 
