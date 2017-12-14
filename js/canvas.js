@@ -12,7 +12,7 @@ var mouse = {
   y: undefined
 }
 
-var maxRadius = 30;
+var maxRadius = 100;
 var minRadius = 5;
 
 // eventlistener need an event argumant
@@ -97,7 +97,7 @@ var circleArray = [];
 function init() {
 
   circleArray = [];
-  for (let i = 0; i < 800; i++) {
+  for (let i = 0; i < 1000; i++) {
 
     randomNumber = function (num) {
       return Math.floor(Math.random() * num);

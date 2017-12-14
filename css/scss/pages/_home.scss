@@ -8,7 +8,10 @@ body {
 
 canvas {
   border: 1px solid black;
+  position: fixed;
+  z-index: -1;
 }
+
 
 // Responsive styles if needed
 // @include responsive($big-break) {
