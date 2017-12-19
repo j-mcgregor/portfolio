@@ -97,7 +97,7 @@ var circleArray = [];
 function init() {
 
   circleArray = [];
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < 500; i++) {
 
     randomNumber = function (num) {
       return Math.floor(Math.random() * num);
@@ -106,8 +106,8 @@ function init() {
     var radius = Math.random() * 5 + 1;
     var x = Math.random() * (innerWidth - (radius * 2)) + radius;
     var y = Math.random() * (innerHeight - (radius * 2)) + radius;
-    var dx = (Math.random() - 0.5) * randomNumber(10);
-    var dy = (Math.random() - 0.5) * randomNumber(10);
+    var dx = (Math.random() - 0.5) * randomNumber(5);
+    var dy = (Math.random() - 0.5) * randomNumber(5);
 
     // Lower the first color for blue/geen color theme, the second for red/purple/indigo, the third for red/yellow/orange
     randomColor = function () {

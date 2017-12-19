@@ -45,7 +45,8 @@
     flex: 0 1 auto;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-left: -$margin;
+    margin-left: 0;
+    // margin-left: -$margin;
     
     &-center {
       text-align: center;
