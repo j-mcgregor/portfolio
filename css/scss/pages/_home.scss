@@ -23,6 +23,7 @@ main {
 
 }
 
+
 .section4 {
   flex: 0 0 auto;
   max-height:100%;
@@ -30,12 +31,25 @@ main {
   margin: 0;
   padding: 0;
   transition: .2s ease-in-out;
+
+  .title-container {
+    border: 1px solid black;
+    margin: 8em 2em 2em 2em;
+    vertical-align: middle;
+  }
   
-  &:hover {
-    background: rgba(150,150,150,.3);
+  &.section-home:hover {
+    background: rgba(155, 35, 35, 0.3);
+  }
+  &.section-portfolio:hover {
+    background: rgba(86, 84, 209, 0.3);
+  }
+  &.section-contact:hover {
+    background: rgba(39, 230, 125, 0.3);
   }
   
   h1 {
+    font-size: 3em;
     line-height: 50vh;
     margin: auto;
     text-align: center;
@@ -44,17 +58,53 @@ main {
     transition: .2s ease-in-out;
 
     &:hover {
-      font-size: 4.6em;
+      font-size: 3.2em;
     }
   }
 }
 
 
 // Responsive styles if needed
-// @include responsive($big-break) {
-// }
-// @include responsive($small-break) {
-// }
+@include responsive($big-break) {
+  .section4 {
+    flex: 0 0 auto;
+    height:33.3333%;
+    width:100%;
+
+    .title-container {
+      border: 1px solid black;
+      margin: 2em;
+    }
+
+    .title h1 {
+      line-height: 10vh;
+      font-size: 2em;
+      // margin-top: 30px;
+    }
+
+    .subtitle {
+      margin-top: 30px;
+    }
+    
+  }
+}
+@include responsive($small-break) {
+  .section4 {
+    flex: 0 0 auto;
+    height:33.3333%;
+    width:100%;
+    
+    .title h1 {
+      line-height: 10vh;
+      font-size: 2em;
+      margin-top: 30px;
+    }
+
+    .subtitle p {
+      margin-top: 30px;
+    }
+  }
+}
 
 // Mobile first styles if needed
 // @include mobilefirst($big-break) {
